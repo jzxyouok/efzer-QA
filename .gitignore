@@ -1,0 +1,5 @@
+# Ignore Runtime Folder
+/Runtime/
+
+# Log Files
+*.log
