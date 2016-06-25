@@ -8,4 +8,5 @@ return array(
 	'SHOW_ERROR_MSG'        =>  true,
   'MODULE_DENY_LIST'=>  array('Common','Runtime'),
   'MULTI_MODULE'          =>  true,
+	'DEFAULT_MODULE'        =>  'Player',
 );
