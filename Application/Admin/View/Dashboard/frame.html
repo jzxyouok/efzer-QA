@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><block name="title"></block></title>
+    <link rel="shortcut icon" href="__PUBLIC__/favicon.png">
+    <css href="__PUBLIC__/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <css href="__PUBLIC__/css/dashboard.css" />
+    <css href="__PUBLIC__/css/font.css" />
+    <js href="__PUBLIC__/jquery/2.2.4/jquery.min.js" />
+    <js href="__PUBLIC__/bootstrap/3.3.6/js/bootstrap.min.js" />
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">{$Think.config.activity_name}后台管理</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <block name="menu"><include file="menu" /></block>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <block name="content"></block>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
