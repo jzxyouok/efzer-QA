@@ -12,6 +12,9 @@ class DashboardController extends Controller{
     if($submissions_count == 0){
       $this->assign('responses_correct_average','N/A');
     }
+    else{
+      $this->assign('responses_correct_average',$Responses->avg('correct'));
+    }
     $this->display();
   }
 }
