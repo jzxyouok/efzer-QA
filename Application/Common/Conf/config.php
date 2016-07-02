@@ -1,6 +1,7 @@
 <?php
 return array(
 	'ACTIVITY_NAME' => '二附中人问答挑战',
+	'ACTIVITY_HOLDER' => '华东师大二附中校友联络会',
 	'COOKIE_PREFIX'         =>  'efzer_qagame_',
 	'URL_MODEL'             =>  2,
 	'URL_HTML_SUFFIX'       =>  '',
