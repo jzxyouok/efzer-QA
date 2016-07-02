@@ -59,7 +59,7 @@ class DashboardController extends Controller{
       }
       return;
     }
-    $this->assign('empty_message','<tr class="active"><th colspan="4">题库为空</th></tr>');
+    $this->assign('empty_message','<tr class="active"><th colspan="5">题库为空</th></tr>');
     $questions = $Question->select();
     for($i = 0; $i < count($questions); $i++){
       $questions[$i]['question_choices'] = implode(' | ', explode('|', $questions[$i]['question_choices']));
