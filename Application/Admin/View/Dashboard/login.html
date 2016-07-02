@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>登录 - {$Think.config.activity_name}后台管理</title>
+    <link rel="shortcut icon" href="__PUBLIC__/favicon.png">
+    <css href="__PUBLIC__/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <css href="__PUBLIC__/css/font.css" />
+    <js href="__PUBLIC__/jquery/2.2.4/jquery.min.js" />
+    <style>body{padding-top: 50px; padding-bottom:20px;}</style>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand">{$Think.config.activity_name}后台管理</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="jumbotron">
+      <div class="container">
+        <h1>{$Think.config.activity_name}</h1>
+        <p>管理用户登录</p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div style="max-width:500px;margin-left:auto;margin-right:auto;">
+        <form method="POST" class="form-horizontal" style="margin:auto;margin-top:30px;" role="form">
+          <notempty name="errmsg">
+            <div class="row">
+              <div class="col-sm-8 col-sm-offset-2">
+                <div class="alert alert-danger" role="alert"><strong>{$errmsg}</strong></div>
+              </div>
+              <div class="col-sm-2"></div>
+            </div>
+          </notempty>
+
+          <div id="pwdinputdiv" class="form-group">
+            <label for="netidfield" class="col-sm-2 control-label">管理密码</label>
+            <div class="col-sm-8">
+              <input id="pwdfield" name="pwd" type="password" class="form-control" maxlength="32" required>
+            </div>
+          </div>
+          <div id="captchainputdiv" class="form-group">
+            <label for="netidfield" class="col-sm-2 control-label">验证码</label>
+            <div class="col-sm-8">
+              <input id="captchafield" name="captcha" placeholder="点击验证码图片可刷新验证码" type="text" class="form-control" maxlength="32" required autocomplete="off" pattern="[A-Za-z0-9]{6}" style="border-bottom-right-radius: 0; border-bottom-left-radius: 0;">
+            </div>
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8 col-sm-offset-2">
+              <img id="captcha" src="{:U('showAdminLoginCaptcha')}" class="img-responsive img-thumbnail" style="width:100%;border-top-right-radius: 0; border-top-left-radius: 0;border-top-width: 0;">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+              <p>
+                <button id="check" type="submit" id="submitbutton" class="btn btn-lg btn-primary btn-block">
+                  <span class="glyphicon glyphicon-log-in"></span>&nbsp;登录</button>
+              </p>
+            </div>
+          </div>
+        </form>
+      </div>
+      <hr />
+      <footer style="text-align:center;">
+        <p>&copy;{:date('Y')} {$Think.config.activity_holder}</p>
+      </footer>
+    </div>
+    <script>
+      $("#captcha").click(function(){
+        $("#captcha").attr("src","{:U('showAdminLoginCaptcha')}?" + Math.random());
+      });
+    </script>
+  </body>
+</html>
