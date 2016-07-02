@@ -1,0 +1,106 @@
+<extend name="frame" />
+<block name="title">题库管理</block>
+<block name="content">
+  <h1 class="page-header">题库管理 <small>Questions Management</small></h1>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>问题ID</th>
+        <th>问题文本</th>
+        <th class="hidden-xs hidden-sm">选项</th>
+        <th>正确答案</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="questions-table">
+      <volist name="questions" id="q" empty="$empty_message">
+        <tr id="question-tr-{$q.question_id}">
+          <th scope="row">{$q.question_id}</th>
+          <td>{$q.question_text}</td>
+          <td class="hidden-xs hidden-sm">{$q.question_choices}</td>
+          <td>{$q.question_answer}</td>
+          <td><button class="btn btn-xs btn-danger" onclick="remove_question({$q.question_id})"><span class="glyphicon glyphicon-remove"></span>&nbsp;移除</button></td>
+        </tr>
+      </volist>
+    </tbody>
+  </table>
+  <h4>添加问题</h4>
+  <div class="container-fluid">
+    <form id="form-add-question" lass="form-horizontal">
+      <div class="form-group">
+        <label>问题文本</label>
+        <input name="question_text" type="text" class="form-control" placeholder="校友联络会技术部何时开始实施全站 HTTPS 化？">
+      </div>
+      <div class="form-group">
+        <label>问题选项</label>
+        <textarea name="question_choices" rows="4" wrap="hard" class="form-control" placeholder="2013&#10;2014&#10;2015&#10;2016"></textarea>
+      </div>
+      <div class="form-group">
+        <label>问题答案</label>
+        <input name="question_answer" type="text" class="form-control" placeholder="2016">
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp;添加至题库</button>
+      </div>
+      <input type="hidden" name="action" value="add">
+    </form>
+  </div>
+  <script>
+    function remove_question(question_id){
+      if(confirm("你确定删除问题" + question_id + "吗？")){
+        $.ajax({
+          cache: false,
+          type: "POST",
+          data: "action=delete&question_id=" + question_id,
+          async: true,
+          error: function(request){
+            alert("无法连接到服务器删除问题");
+          },
+          success: function(data){
+            result = JSON.parse(data);
+            if(result.status == "success"){
+              $("#question-tr-" + result.question_id).fadeOut(600,function(){
+                $("#question-tr-" + result.question_id).remove();
+              });
+            }
+            else if(result.status == "not_exist"){
+              alert('请求删除的问题不存在');
+            }
+            else{
+              alert("服务器返回未定义的处理结果：" + data);
+            }
+          }
+        });
+      }
+    }
+    $('#form-add-question').submit(function(e) {
+        $.ajax({
+          cache: true,
+          type: "POST",
+          data:$('#form-add-question').serialize(),
+          async: true,
+          error: function(request) {
+            alert("无法连接到服务器删除问题");
+          },
+          success: function(data) {
+            result = JSON.parse(data);
+            if(result.status == "success"){
+              $('#form-add-question')[0].reset();
+              newrow = "<tr id=\"question-tr-" + result.result.question_id + "\">";
+              newrow += "<th scope=\"row\">" + result.result.question_id + "</th>";
+              newrow += "<td>" + result.result.question_text + "</td>";
+              newrow += "<td class=\"hidden-xs hidden-sm\">" + result.result.question_choices + "</td>";
+              newrow += "<td>" + result.result.question_answer + "</td>";
+              newrow += "<td><button class=\"btn btn-xs btn-danger\" onclick=\"remove_question(" + result.result.question_id + ")\"><span class=\"glyphicon glyphicon-remove\"></span>&nbsp;移除</button></td>";
+              newrow += "</tr>";
+              $("#questions-table").append(newrow);
+            }
+            else{
+              alert("服务器返回未定义的处理结果：" + data);
+            }
+          }
+        });
+        e.preventDefault();
+      });
+  </script>
+</block>
