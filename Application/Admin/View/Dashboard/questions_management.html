@@ -85,6 +85,7 @@
           success: function(data) {
             result = JSON.parse(data);
             if(result.status == "success"){
+              $("#questions_empty_notice").hide();
               $('#form-add-question')[0].reset();
               newrow = "<tr id=\"question-tr-" + result.result.question_id + "\">";
               newrow += "<th scope=\"row\">" + result.result.question_id + "</th>";

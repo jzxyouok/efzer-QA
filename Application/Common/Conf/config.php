@@ -28,7 +28,7 @@ return array(
 	'TMPL_TEMPLATE_SUFFIX'  =>  '.html',
 	'DB_TYPE'               =>  'mysql',
 	'SHOW_ERROR_MSG'        =>  true,
-  'MODULE_DENY_LIST'=>  array('Common','Runtime'),
-  'MULTI_MODULE'          =>  true,
+	'MODULE_DENY_LIST'=>  array('Common','Runtime'),
+	'MULTI_MODULE'          =>  true,
 	'DEFAULT_MODULE'        =>  'Player',
 );
