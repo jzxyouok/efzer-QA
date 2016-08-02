@@ -17,7 +17,7 @@ class DashboardController extends Controller{
       $this->assign('responses_correct_average','N/A');
     }
     else{
-      $this->assign('responses_correct_average',$Responses->avg('correct'));
+      $this->assign('responses_correct_average',round(100 * $Submission->avg('score') / 15,2));
     }
     $this->display();
   }
