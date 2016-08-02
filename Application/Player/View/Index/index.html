@@ -10,6 +10,25 @@
     <css href="__PUBLIC__/weui/0.4.3/weui.min.css" />
     <css href="__PUBLIC__/css/font.css" />
     <js href="__PUBLIC__/jquery/2.2.4/jquery.min.js" />
+    <js href="https://res.wx.qq.com/open/js/jweixin-1.1.0.js" />
+    <script><literal>
+      wx.config({
+      </literal>
+        debug: false,
+        appId: '{$sign.appID}',
+        timestamp: {$sign.timestamp},
+        nonceStr: '{$sign.noncestr}',
+        signature: '{$sign.signature}',
+        jsApiList: ['hideMenuItems']
+      });
+      <literal>
+      wx.ready(function(){
+        wx.hideMenuItems({
+          menuList: ['menuItem:jsDebug','menuItem:editTag','menuItem:delete','menuItem:copyUrl','menuItem:originPage','menuItem:readMode','menuItem:openWithQQBrowser','menuItem:openWithSafari','menuItem:share:email','menuItem:share:brand','menuItem:share:qq','menuItem:share:weiboApp','menuItem:share:facebook','menuItem:favorite']
+        });
+      });
+      </literal>
+    </script>
     <style>
       body{
         margin-top: 20px;
@@ -21,7 +40,7 @@
     </style>
   </head>
   <body>
-    <form method="POST">
+    <form action="/" method="POST">
       <h2 style="text-align:center;">二附中人问答挑战</h2>
       <volist name="question_list" id="question" key="question_i">
         <input type="hidden" name="question[{$question_i}][question_id]" value="{$question.question_id}">
