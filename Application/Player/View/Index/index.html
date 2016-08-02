@@ -23,7 +23,7 @@
     <form method="POST">
       <h2 style="text-align:center;">二附中人问答挑战</h2>
       <volist name="question_list" id="question" key="question_i">
-        <input type="hidden" name="question[{$question_i}]['question_id']" value="{$question.question_id}">
+        <input type="hidden" name="question[{$question_i}][question_id]" value="{$question.question_id}">
         <div class="weui_cells_title">{$question.question_text}</div>
         <div class="weui_cells weui_cells_radio">
           <foreach name="question.question_choices" item="choice" key="choice_i" >
@@ -32,7 +32,7 @@
                 <p>{$choice}</p>
               </div>
               <div class="weui_cell_ft">
-                <input type="radio" class="weui_check" name="question[{$question_i}]['answer']" value="{$choice}" id="question{$question_i}-choice{$choice_i}" required>
+                <input type="radio" class="weui_check" name="question[{$question_i}][answer]" value="{$choice}" id="question{$question_i}-choice{$choice_i}" required>
                 <span class="weui_icon_checked"></span>
               </div>
             </label>
