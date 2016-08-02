@@ -48,7 +48,8 @@ class IndexController extends Controller{
     $upper_condition['score'] = array('gt',$score);
     $upper_count = $Submission->where($upper_condition)->count();
     $total_count = $Submission->count();
-    $this->assign('percentage',round(100 * $upper_count / $total_count,2));
+    $this->assign('percentage',round(100 * (1 - $upper_count / $total_count),2));
+    $this->assign('correct_percentage',round(100 * $score / 15));
     if($score >= 15){
       $message = "你居然还不加入校友联络会？！";
     }
