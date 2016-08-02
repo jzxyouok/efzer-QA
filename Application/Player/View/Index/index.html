@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>{$Think.config.activity_name}</title>
+    <link rel="shortcut icon" href="__PUBLIC__/favicon.png">
+    <css href="__PUBLIC__/weui/0.4.3/weui.min.css" />
+    <css href="__PUBLIC__/css/font.css" />
+    <js href="__PUBLIC__/jquery/2.2.4/jquery.min.js" />
+    <style>
+      body{
+        margin-top: 20px;
+      }
+      #submit-button{
+        font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif !important;
+      }
+    </style>
+  </head>
+  <body>
+    <form method="POST">
+      <h2 style="text-align:center;">二附中人问答挑战</h2>
+      <volist name="question_list" id="question" key="question_i">
+        <input type="hidden" name="question[{$question_i}]['question_id']" value="{$question.question_id}">
+        <div class="weui_cells_title">{$question.question_text}</div>
+        <div class="weui_cells weui_cells_radio">
+          <foreach name="question.question_choices" item="choice" key="choice_i" >
+            <label class="weui_cell weui_check_label" for="question{$question_i}-choice{$choice_i}">
+              <div class="weui_cell_bd weui_cell_primary">
+                <p>{$choice}</p>
+              </div>
+              <div class="weui_cell_ft">
+                <input type="radio" class="weui_check" name="question[{$question_i}]['answer']" value="{$choice}" id="question{$question_i}-choice{$choice_i}" required>
+                <span class="weui_icon_checked"></span>
+              </div>
+            </label>
+          </foreach>
+        </div>
+        <br />
+      </volist>
+      <div style="padding-left:10px;padding-right:10px;margin-top:10px;"><button id="submit-button" class="weui_btn weui_btn_primary">提交</button></div>
+    </form>
+  </body>
+</html>
