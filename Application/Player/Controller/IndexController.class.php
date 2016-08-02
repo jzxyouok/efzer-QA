@@ -79,4 +79,8 @@ class IndexController extends Controller{
     }
     return $cached_answer;
   }
+
+  public function remove_cookie(){
+    cookie('submission_id',null);
+  }
 }
